@@ -20,7 +20,7 @@ validate([ mustContainA ], "cheese"); // [ "Value must contain the letter 'a'" ]
 // can use a factory pattern for your validation methods to make things nice
 const mustContain = (requirement: any) => {
     return (value: string | Array<any>) => {
-        return value.indexOf("A") === -1 ? `Value must contain '${requirement}'` : null;
+        return value.indexOf(requirement) === -1 ? `Value must contain '${requirement}'` : null;
     };
 };
 
