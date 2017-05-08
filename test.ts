@@ -5,10 +5,10 @@ import { validate } from "./index";
 export class ValidationTests {
 
     @Test()
-    public shouldReturnNullIfNoValidators() {
+    public shouldReturnEmptyArrayIfNoValidators() {
         const result = validate([], 0);
 
-        Expect(result).toBe(null);
+        Expect(result).toEqual([]);
     }
 
     @TestCase("an error occured")
@@ -49,6 +49,8 @@ export class ValidationTests {
             if (receivedValue === value) {
                 calledCorrectly = true;
             }
+            
+            return null;
         };
 
         validate([
@@ -64,6 +66,8 @@ export class ValidationTests {
             if (receivedValue === value) {
                 calledCorrectly = true;
             }
+
+            return null;
         };
 
         validate([
