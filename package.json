@@ -4,8 +4,8 @@
   "description": "NewOrbit validation",
   "scripts": {
     "build": "tsc",
-    "lint": "tslint -c tslint.json \"./{src,test}/**/*.{ts,tsx}\"",
-    "test": "npm run build && alsatian \"./test/**/*.test.js\""
+    "lint": "tslint -c tslint.json index.ts test.ts",
+    "test": "npm run build && alsatian test.js"
   },
   "keywords": [
     "validation"
