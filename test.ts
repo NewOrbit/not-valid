@@ -15,7 +15,7 @@ export class ValidationTests {
     @TestCase("foo")
     public shouldReturnErrorMessageForOneError(message: string) {
         const result = validate([
-            () => message            
+            () => message
         ], 0);
 
         Expect(result).toEqual([ message ]);
@@ -25,7 +25,7 @@ export class ValidationTests {
     @TestCase("404 document not found", "ice cream and brie")
     public shouldReturnErrorMessageForTwoErrors(firstMessage: string, secondMessage: string) {
         const result = validate([
-            () => firstMessage, () => secondMessage            
+            () => firstMessage, () => secondMessage
         ], 0);
 
         Expect(result).toEqual([ firstMessage, secondMessage ]);
@@ -35,7 +35,7 @@ export class ValidationTests {
     @TestCase("ice cream and brie")
     public shouldNotReturnErrorMessageForValidatorWhichReturnsNull(secondMessage: string) {
         const result = validate([
-            () => null, () => secondMessage            
+            () => null, () => secondMessage
         ], 0);
 
         Expect(result).toEqual([ secondMessage ]);
@@ -49,12 +49,12 @@ export class ValidationTests {
             if (receivedValue === value) {
                 calledCorrectly = true;
             }
-            
+
             return null;
         };
 
         validate([
-            validator, () => null            
+            validator, () => null
         ], value);
     }
 
@@ -71,7 +71,7 @@ export class ValidationTests {
         };
 
         validate([
-            () => null, validator            
+            () => null, validator
         ], value);
     }
 

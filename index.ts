@@ -1,14 +1,11 @@
 type ValidationResult = string | null;
-
-interface ValidationFunction<T> {
-  (value: T): string | null;
-}
+type ValidationFunction<T> = (value: T) => ValidationResult;
 
 const validate = <T>(validators: Array<ValidationFunction<T>>, value: T) => {
-    let errors: Array<ValidationResult> = [];
-    
+    const errors: Array<ValidationResult> = [];
+
     validators.forEach(validator => {
-        let result = validator(value);
+        const result = validator(value);
 
         // if the validator doesn't return null, then there was an error
         if (result !== null) {
@@ -23,4 +20,4 @@ export {
     ValidationResult,
     ValidationFunction,
     validate
-}
+};

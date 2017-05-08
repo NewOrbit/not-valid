@@ -5,9 +5,11 @@
   "main": "index.js",
   "typings": "index.d.ts",
   "scripts": {
+    "prepublish": "npm run review && npm run build",
     "build": "tsc",
     "lint": "tslint -c tslint.json index.ts test.ts",
-    "test": "npm run build && alsatian test.js"
+    "test": "npm run build && alsatian test.js",
+    "review": "npm run test && npm run lint"
   },
   "files": [
     "index.js",
