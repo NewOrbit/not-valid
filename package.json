@@ -2,11 +2,17 @@
   "name": "@neworbit/validation",
   "version": "0.0.1",
   "description": "NewOrbit validation",
+  "main": "index.js",
+  "typings": "index.d.ts",
   "scripts": {
     "build": "tsc",
     "lint": "tslint -c tslint.json index.ts test.ts",
     "test": "npm run build && alsatian test.js"
   },
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
   "keywords": [
     "validation"
   ],
