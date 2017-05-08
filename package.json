@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "NewOrbit validation",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "tslint -c tslint.json \"./{src,test}/**/*.{ts,tsx}\""
   },
   "keywords": [
     "validation"
@@ -20,7 +21,9 @@
   "homepage": "https://github.com/NewOrbit/NewOrbit.validation#readme",
   "dependencies": {},
   "devDependencies": {
+    "@neworbit/tslint-config": "0.0.4",
     "alsatian": "^1.3.1",
+    "tslint": "^5.2.0",
     "typescript": "^2.2.2"
   }
 }
