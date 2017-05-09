@@ -29,7 +29,7 @@ const createValidator: <T>(predicate: ValidationPredicate<T>, message: string) =
 
         return message;
     };
-}
+};
 
 export {
     ValidationResult,
