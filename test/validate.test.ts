@@ -1,5 +1,5 @@
 import { TestFixture, Test, TestCase, Expect } from "alsatian";
-import { validate } from "./index";
+import { validate } from "../index";
 
 @TestFixture()
 export class ValidationTests {
