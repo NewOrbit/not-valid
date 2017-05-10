@@ -2,10 +2,10 @@ type ValidationResult = string | null;
 type ValidationPredicate<T> = (value: T) => boolean;
 type ValidationFunction<T> = (value: T) => ValidationResult;
 
-const validate: <T>(validators: Array<ValidationFunction<T>>, value: T) => Array<ValidationResult>
+const validate: <T>(validators: Array<ValidationFunction<T>>, value: T) => Array<string>
     = <T>(validators: Array<ValidationFunction<T>>, value: T) => {
 
-    const errors: Array<ValidationResult> = [];
+    const errors: Array<string> = [];
 
     validators.forEach(validator => {
         const result = validator(value);
