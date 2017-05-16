@@ -75,4 +75,45 @@ export class ValidationTests {
         ], value);
     }
 
+    @Test()
+    public shouldOnlyValidateFirstIfCalledWithSequentialOption() {
+        const value = 5;
+        
+        let firstValidatorCalled = false;
+        const firstValidator = (receivedValue: number) => {
+            if (receivedValue === value) {
+                firstValidatorCalled = true;
+            }
+
+            return "return an error here";
+        };
+
+        let secondValidatorCalled = false;
+        const secondValidator = (receivedValue: number) => {
+            if (receivedValue === value) {
+                secondValidatorCalled = true;
+            }
+
+            return null;
+        };
+
+        validate([ firstValidator, secondValidator ], 
+            value, { sequential: true });
+
+        Expect(firstValidatorCalled).toBe(true);
+        Expect(secondValidatorCalled).toBe(false);
+    }
+
+    @Test()
+    public shouldOnlyReturnFirstErrorIfCalledWithSequentialOption() {
+        const firstMessage = "first message";
+        const firstValidator = () => firstMessage;
+        const secondValidator = () => "junk message";
+
+        const errors = validate( [ firstValidator, secondValidator ],
+            5, { sequential: true });
+
+        Expect(errors).toEqual([ firstMessage ]);
+    }
+
 }
