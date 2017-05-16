@@ -52,3 +52,23 @@ const mustContain = (requirement: any) => {
     return createValidator<string | Array<any>>(v => v.indexOf(requirement) !== -1, `Value must contain '${requirement}'`);
 };
 ```
+
+### Options
+
+The third parameter of `validate` is an object containing options.
+
+```typescript
+interface ValidationOptions {
+    sequential?: boolean;
+}
+```
+
+#### `sequential`
+
+The validation will break on the first error, therefore only returning a single validation error.
+
+```typescript
+validate([ something, another ], 5, { sequential: true });
+```
+
+If `something` fails validation, `another` will not be called.
