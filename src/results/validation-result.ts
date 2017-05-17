@@ -1,14 +1,7 @@
+import { ValidationFail } from "./";
+
 interface ValidationResult {
     type: string;
-}
-
-class ValidationFail implements ValidationResult {
-    public type: string = "fail";
-    public message: string;
-
-    constructor(message: string) {
-        this.message = message;
-    }
 }
 
 class Result {
@@ -19,6 +12,5 @@ class Result {
 
 export {
     ValidationResult,
-    ValidationFail,
     Result
 };

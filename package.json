@@ -1,13 +1,15 @@
 {
   "name": "@neworbit/validation",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "NewOrbit validation",
   "main": "src/index.js",
   "typings": "src/index.d.ts",
   "scripts": {
     "prepublish": "npm run review && npm run build",
     "build": "tsc",
-    "lint": "tslint -c tslint.json \"{src,test}/*.js\"",
+    "lint:src": "tslint -c tslint.json src/index.ts src/results/index.ts src/results/validation-fail.ts src/results/validation-result.ts",
+    "lint:test": "tslint -c tslint.json test/validate.test.ts test/create-validator.test.ts",
+    "lint": "npm run lint:src && npm run lint:test",
     "test": "npm run build && alsatian \"test/*.test.js\"",
     "review": "npm run test && npm run lint"
   },

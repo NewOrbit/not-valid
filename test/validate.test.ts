@@ -78,7 +78,7 @@ export class ValidationTests {
     @Test()
     public shouldOnlyValidateFirstIfCalledWithSequentialOption() {
         const value = 5;
-        
+
         let firstValidatorCalled = false;
         const firstValidator = (receivedValue: number) => {
             if (receivedValue === value) {
@@ -97,7 +97,7 @@ export class ValidationTests {
             return Result.Pass;
         };
 
-        validate([ firstValidator, secondValidator ], 
+        validate([ firstValidator, secondValidator ],
             value, { sequential: true });
 
         Expect(firstValidatorCalled).toBe(true);
@@ -119,7 +119,7 @@ export class ValidationTests {
     @Test()
     public shouldNotCallSecondValidatorIfFirstStops() {
         const value = 5;
-        
+
         let firstValidatorCalled = false;
         const firstValidator = (receivedValue: number) => {
             if (receivedValue === value) {

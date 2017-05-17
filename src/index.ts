@@ -1,4 +1,4 @@
-import { ValidationResult, ValidationFail, Result } from "./validation-result";
+import { ValidationResult, ValidationFail, Result } from "./results/";
 
 type ValidationPredicate<T> = (value: T) => boolean;
 type ValidationFunction<T> = (value: T) => ValidationResult;
@@ -36,7 +36,7 @@ const validate: <T>(validators: Array<ValidationFunction<T>>, value: T, options?
 
     for (const validator of validators) {
         const result = validator(value);
-        
+
         if (isFailure(result)) {
             errors.push(result.message);
 
