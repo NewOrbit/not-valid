@@ -2,18 +2,18 @@
   "name": "@neworbit/validation",
   "version": "0.0.9",
   "description": "NewOrbit validation",
-  "main": "index.js",
-  "typings": "index.d.ts",
+  "main": "src/index.js",
+  "typings": "src/index.d.ts",
   "scripts": {
     "prepublish": "npm run review && npm run build",
     "build": "tsc",
-    "lint": "tslint -c tslint.json index.ts test.ts",
+    "lint": "tslint -c tslint.json \"{src,test}/*.js\"",
     "test": "npm run build && alsatian \"test/*.test.js\"",
     "review": "npm run test && npm run lint"
   },
   "files": [
-    "index.js",
-    "index.d.ts"
+    "src/**/*.js",
+    "src/**/*.d.ts"
   ],
   "keywords": [
     "validation"

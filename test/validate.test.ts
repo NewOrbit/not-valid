@@ -1,5 +1,5 @@
 import { TestFixture, Test, TestCase, Expect } from "alsatian";
-import { validate } from "../index";
+import { validate, Result } from "../src/index";
 
 @TestFixture()
 export class ValidationTests {
@@ -15,7 +15,7 @@ export class ValidationTests {
     @TestCase("foo")
     public shouldReturnErrorMessageForOneError(message: string) {
         const result = validate([
-            () => message
+            () => Result.Fail(message)
         ], 0);
 
         Expect(result).toEqual([ message ]);
@@ -25,7 +25,7 @@ export class ValidationTests {
     @TestCase("404 document not found", "ice cream and brie")
     public shouldReturnErrorMessageForTwoErrors(firstMessage: string, secondMessage: string) {
         const result = validate([
-            () => firstMessage, () => secondMessage
+            () => Result.Fail(firstMessage), () => Result.Fail(secondMessage)
         ], 0);
 
         Expect(result).toEqual([ firstMessage, secondMessage ]);
@@ -33,9 +33,9 @@ export class ValidationTests {
 
     @TestCase("baz baz baz")
     @TestCase("ice cream and brie")
-    public shouldNotReturnErrorMessageForValidatorWhichReturnsNull(secondMessage: string) {
+    public shouldNotReturnErrorMessageForValidatorWhichPasses(secondMessage: string) {
         const result = validate([
-            () => null, () => secondMessage
+            () => Result.Pass, () => Result.Fail(secondMessage)
         ], 0);
 
         Expect(result).toEqual([ secondMessage ]);
@@ -50,11 +50,11 @@ export class ValidationTests {
                 calledCorrectly = true;
             }
 
-            return null;
+            return Result.Pass;
         };
 
         validate([
-            validator, () => null
+            validator, () => Result.Pass
         ], value);
     }
 
@@ -67,11 +67,11 @@ export class ValidationTests {
                 calledCorrectly = true;
             }
 
-            return null;
+            return Result.Pass;
         };
 
         validate([
-            () => null, validator
+            () => Result.Pass, validator
         ], value);
     }
 
@@ -85,7 +85,7 @@ export class ValidationTests {
                 firstValidatorCalled = true;
             }
 
-            return "return an error here";
+            return Result.Fail("return an error here");
         };
 
         let secondValidatorCalled = false;
@@ -94,7 +94,7 @@ export class ValidationTests {
                 secondValidatorCalled = true;
             }
 
-            return null;
+            return Result.Pass;
         };
 
         validate([ firstValidator, secondValidator ], 
@@ -107,13 +107,41 @@ export class ValidationTests {
     @Test()
     public shouldOnlyReturnFirstErrorIfCalledWithSequentialOption() {
         const firstMessage = "first message";
-        const firstValidator = () => firstMessage;
-        const secondValidator = () => "junk message";
+        const firstValidator = () => Result.Fail(firstMessage);
+        const secondValidator = () => Result.Fail("junk message");
 
         const errors = validate( [ firstValidator, secondValidator ],
             5, { sequential: true });
 
         Expect(errors).toEqual([ firstMessage ]);
+    }
+
+    @Test()
+    public shouldNotCallSecondValidatorIfFirstStops() {
+        const value = 5;
+        
+        let firstValidatorCalled = false;
+        const firstValidator = (receivedValue: number) => {
+            if (receivedValue === value) {
+                firstValidatorCalled = true;
+            }
+
+            return Result.Stop;
+        };
+
+        let secondValidatorCalled = false;
+        const secondValidator = (receivedValue: number) => {
+            if (receivedValue === value) {
+                secondValidatorCalled = true;
+            }
+
+            return Result.Pass;
+        };
+
+        validate([ firstValidator, secondValidator ], value);
+
+        Expect(firstValidatorCalled).toBe(true);
+        Expect(secondValidatorCalled).toBe(false);
     }
 
 }

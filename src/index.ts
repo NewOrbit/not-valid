@@ -1,4 +1,5 @@
-type ValidationResult = string | null;
+import { ValidationResult, ValidationFail, Result } from "./validation-result";
+
 type ValidationPredicate<T> = (value: T) => boolean;
 type ValidationFunction<T> = (value: T) => ValidationResult;
 
@@ -22,6 +23,10 @@ const getOptions = (options?: ValidationOptions) => {
     };
 };
 
+function isFailure(result: ValidationResult): result is ValidationFail {
+    return (result as ValidationFail).message !== undefined;
+}
+
 const validate: <T>(validators: Array<ValidationFunction<T>>, value: T, options?: ValidationOptions) => Array<string>
     = <T>(validators: Array<ValidationFunction<T>>, value: T, options?: ValidationOptions) => {
 
@@ -31,14 +36,15 @@ const validate: <T>(validators: Array<ValidationFunction<T>>, value: T, options?
 
     for (const validator of validators) {
         const result = validator(value);
-
-        // if the validator doesn't return null, then there was an error
-        if (result !== null) {
-            errors.push(result);
+        
+        if (isFailure(result)) {
+            errors.push(result.message);
 
             if (opts.sequential) {
                 break;
             }
+        } else if (result.type === "stop") {
+            break;
         }
     }
 
@@ -48,17 +54,19 @@ const validate: <T>(validators: Array<ValidationFunction<T>>, value: T, options?
 const createValidator: <T>(predicate: ValidationPredicate<T>, message: string) => ValidationFunction<T>
     = <T>(predicate: ValidationPredicate<T>, message: string) => {
 
+    const failure = Result.Fail(message);
+
     return (value: T) => {
         if (predicate(value)) {
-            return null;
+            return Result.Pass;
         }
 
-        return message;
+        return failure;
     };
 };
 
 export {
-    ValidationResult,
+    Result,
     ValidationPredicate,
     ValidationFunction,
     ValidationOptions,

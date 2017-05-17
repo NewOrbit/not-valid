@@ -1,5 +1,5 @@
 import { TestFixture, Test, TestCase, Expect } from "alsatian";
-import { createValidator } from "../index";
+import { createValidator, Result } from "../src/index";
 
 @TestFixture()
 export class CreateValidatorTests {
@@ -12,12 +12,11 @@ export class CreateValidatorTests {
         const message = "failed";
         const validator = createValidator<any>(predicate, message);
         
-        // expect null if pass, message if fail
-        const expectedResult = shouldPass ? null : message;
+        const expectedResult = shouldPass ? Result.Pass : Result.Fail(message);
 
         const result = validator(input);
         
-        Expect(result).toBe(expectedResult);
+        Expect(result).toEqual(expectedResult);
     }
 
     @TestCase("it aint no good yo")
@@ -28,7 +27,7 @@ export class CreateValidatorTests {
         // make validation fail
         const result = validator(5);
 
-        Expect(result).toBe(message);
+        Expect(result).toEqual(Result.Fail(message));
     }    
 
 }
