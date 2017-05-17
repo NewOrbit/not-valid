@@ -35,7 +35,7 @@ validate([
 
 ### Creating validation functions
 
-A validation function must take in a value `value`, and return `null` if `value` is valid, or a message is `value` is invalid.
+A validation function must take in a value `value`, and return `Result.Pass` if `value` is valid, or `Result.Fail(message)` is `value` is invalid. They can also return `Result.Stop`, which will silently stop the validation cycle (no more errors).
 
 This can be done with the helper method `createValidator` in `@neworbit/validation`:
 
