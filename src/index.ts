@@ -7,8 +7,10 @@ interface ValidationOptions {
     sequential?: boolean;
 }
 
+const getDefaultIfUndefined = (val: any, defaultVal: any) => val === undefined ? defaultVal : val;
+
 const DEFAULT_OPTIONS: ValidationOptions = {
-    sequential: false
+    sequential: true
 };
 
 const getOptions = (options?: ValidationOptions) => {
@@ -19,7 +21,7 @@ const getOptions = (options?: ValidationOptions) => {
     }
 
     return {
-        sequential: options.sequential || DEFAULT_OPTIONS.sequential
+        sequential: getDefaultIfUndefined(options.sequential, DEFAULT_OPTIONS.sequential)
     };
 };
 

@@ -13,7 +13,7 @@ export class ValidationTests {
 
     @TestCase("an error occured")
     @TestCase("foo")
-    public shouldReturnErrorMessageForOneError(message: string) {
+    public shouldReturnError(message: string) {
         const result = validate([
             () => Result.Fail(message)
         ], 0);
@@ -21,19 +21,29 @@ export class ValidationTests {
         Expect(result).toEqual([ message ]);
     }
 
-    @TestCase("foo", "baz baz baz")
-    @TestCase("404 document not found", "ice cream and brie")
-    public shouldReturnErrorMessageForTwoErrors(firstMessage: string, secondMessage: string) {
+    @TestCase("foo")
+    @TestCase("404 document not found")
+    public shouldOnlyReturnFirstError(message: string) {
+        const result = validate([
+            () => Result.Fail(message), () => Result.Fail("foo")
+        ], 0);
+
+        Expect(result).toEqual([ message ]);
+    }
+
+    @TestCase("foo", "bar")
+    @TestCase("404 document not found", "500 error")
+    public shouldReturnAllErrorsIfNotSequential(firstMessage: string, secondMessage: string) {
         const result = validate([
             () => Result.Fail(firstMessage), () => Result.Fail(secondMessage)
-        ], 0);
+        ], 0, { sequential: false });
 
         Expect(result).toEqual([ firstMessage, secondMessage ]);
     }
 
     @TestCase("baz baz baz")
     @TestCase("ice cream and brie")
-    public shouldNotReturnErrorMessageForValidatorWhichPasses(secondMessage: string) {
+    public shouldNotReturnErrorForPass(secondMessage: string) {
         const result = validate([
             () => Result.Pass, () => Result.Fail(secondMessage)
         ], 0);
@@ -56,11 +66,13 @@ export class ValidationTests {
         validate([
             validator, () => Result.Pass
         ], value);
+
+        Expect(calledCorrectly).toBe(true);
     }
 
     @TestCase(1)
     @TestCase(2)
-    public shouldCallSecondValidatorWithValue(value: number) {
+    public shouldCallSecondValidatorWithValueIfFirstPasses(value: number) {
         let calledCorrectly = false;
         const validator = (receivedValue: number) => {
             if (receivedValue === value) {
@@ -73,10 +85,40 @@ export class ValidationTests {
         validate([
             () => Result.Pass, validator
         ], value);
+
+        Expect(calledCorrectly).toBe(true);
     }
 
     @Test()
-    public shouldOnlyValidateFirstIfCalledWithSequentialOption() {
+    public shouldStopAtFirstFail() {
+        const value = 5;
+
+        let firstValidatorCalled = false;
+        const firstValidator = (receivedValue: number) => {
+            if (receivedValue === value) {
+                firstValidatorCalled = true;
+            }
+
+            return Result.Fail("return an error here");
+        };
+
+        let secondValidatorCalled = false;
+        const secondValidator = (receivedValue: number) => {
+            if (receivedValue === value) {
+                secondValidatorCalled = true;
+            }
+
+            return Result.Pass;
+        };
+
+        validate([ firstValidator, secondValidator ], value);
+
+        Expect(firstValidatorCalled).toBe(true);
+        Expect(secondValidatorCalled).toBe(false);
+    }
+
+    @Test()
+    public shouldNotStopAtFirstFailIfSequentialFalse() {
         const value = 5;
 
         let firstValidatorCalled = false;
@@ -98,22 +140,10 @@ export class ValidationTests {
         };
 
         validate([ firstValidator, secondValidator ],
-            value, { sequential: true });
+            value, { sequential: false });
 
         Expect(firstValidatorCalled).toBe(true);
-        Expect(secondValidatorCalled).toBe(false);
-    }
-
-    @Test()
-    public shouldOnlyReturnFirstErrorIfCalledWithSequentialOption() {
-        const firstMessage = "first message";
-        const firstValidator = () => Result.Fail(firstMessage);
-        const secondValidator = () => Result.Fail("junk message");
-
-        const errors = validate( [ firstValidator, secondValidator ],
-            5, { sequential: true });
-
-        Expect(errors).toEqual([ firstMessage ]);
+        Expect(secondValidatorCalled).toBe(true);
     }
 
     @Test()

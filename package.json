@@ -1,6 +1,6 @@
 {
   "name": "@neworbit/validation",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "NewOrbit validation",
   "main": "src/index.js",
   "typings": "src/index.d.ts",
