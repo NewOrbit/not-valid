@@ -65,10 +65,12 @@ interface ValidationOptions {
 
 #### `sequential`
 
+Default: `true`
+
 The validation will break on the first error, therefore only returning a single validation error.
 
 ```typescript
-validate([ something, another ], 5, { sequential: true });
+validate([ something, another ], 5, { sequential: false });
 ```
 
 If `something` fails validation, `another` will not be called.
