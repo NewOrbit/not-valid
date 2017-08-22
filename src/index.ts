@@ -5,15 +5,13 @@ type ValidationPredicate<T> = (value: T) => boolean;
 type SyncValidationFunction<T> = (value: T) => ValidationResult;
 type AsyncValidationFunction<T> = (value: T) => Promise<ValidationResult>;
 type ValidationFunction<T> = SyncValidationFunction<T> | AsyncValidationFunction<T>;
-type ValidateFunction<T> = (validators: ValidationFunction<T>[], value: T, options?: ValidationOptions) => Promise<string[]>;
+type ValidateFunction = <T>(validators: ValidationFunction<T>[], value: T, options?: ValidationOptions) => Promise<string[]>;
 
 function isFailure(result: ValidationResult): result is ValidationFail {
     return result.type === ValidationResultType.Fail;
 }
 
-const validate: ValidateFunction<any>
-    = async <T>(validators: Array<ValidationFunction<T>>, value: T, options?: ValidationOptions) => {
-
+const validate: ValidateFunction = async <T>(validators: Array<ValidationFunction<T>>, value: T, options?: ValidationOptions) => {
     const opts = getOptions(options);
 
     const errors: Array<string> = [];
@@ -35,10 +33,8 @@ const validate: ValidateFunction<any>
     return errors;
 };
 
-const createAsyncValidator: <T>(predicate: (value: T) => Promise<boolean>, message: string) => AsyncValidationFunction<T>
-    =  <T>(predicate: (value: T) => Promise<boolean>, message: string) => {
-
-    return (value: T) => {
+const createAsyncValidator = <T>(predicate: (value: T) => Promise<boolean>, message: string) => {
+    const validationFunction: AsyncValidationFunction<T> = (value: T) => {
         return predicate(value)
             .then(result => {
                 if (result) {
@@ -48,20 +44,20 @@ const createAsyncValidator: <T>(predicate: (value: T) => Promise<boolean>, messa
                 return Result.Fail(message);
             });
     };
+
+    return validationFunction;
 };
 
-const createValidator: <T>(predicate: ValidationPredicate<T>, message: string) => SyncValidationFunction<T>
-    = <T>(predicate: ValidationPredicate<T>, message: string) => {
-
-    const failure = Result.Fail(message);
-
-    return (value: T) => {
+const createValidator = <T>(predicate: ValidationPredicate<T>, message: string) => {
+    const validationFunction: SyncValidationFunction<T> = (value: T) => {
         if (predicate(value)) {
             return Result.Pass;
         }
 
-        return failure;
+        return Result.Fail(message);
     };
+
+    return validationFunction;
 };
 
 export {
