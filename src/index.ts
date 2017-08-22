@@ -1,3 +1,4 @@
+/* tslint:disable:max-line-length */
 import { ValidationResult, ValidationFail, ValidationResultType, Result } from "./results/";
 import { getOptions, ValidationOptions } from "./options";
 
@@ -5,13 +6,13 @@ type ValidationPredicate<T> = (value: T) => boolean;
 type SyncValidationFunction<T> = (value: T) => ValidationResult;
 type AsyncValidationFunction<T> = (value: T) => Promise<ValidationResult>;
 type ValidationFunction<T> = SyncValidationFunction<T> | AsyncValidationFunction<T>;
-type ValidateFunction = <T>(validators: ValidationFunction<T>[], value: T, options?: ValidationOptions) => Promise<string[]>;
+type ValidateFunction = <T>(validators: Array<ValidationFunction<T>>, value: T, options?: ValidationOptions) => Promise<Array<string>>;
 
 function isFailure(result: ValidationResult): result is ValidationFail {
     return result.type === ValidationResultType.Fail;
 }
 
-const validate: ValidateFunction = async <T>(validators: Array<ValidationFunction<T>>, value: T, options?: ValidationOptions) => {
+const validate: ValidateFunction = async <T> (validators: Array<ValidationFunction<T>>, value: T, options?: ValidationOptions) => {
     const opts = getOptions(options);
 
     const errors: Array<string> = [];
