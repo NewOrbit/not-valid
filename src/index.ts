@@ -1,4 +1,4 @@
-import { ValidationResult, ValidationFail, Result } from "./results/";
+import { ValidationResult, ValidationFail, ValidationResultType, Result } from "./results/";
 import { getOptions, ValidationOptions } from "./options";
 
 type ValidationPredicate<T> = (value: T) => boolean;
@@ -8,7 +8,7 @@ type ValidationFunction<T> = SyncValidationFunction<T> | AsyncValidationFunction
 type ValidateFunction<T> = (validators: ValidationFunction<T>[], value: T, options?: ValidationOptions) => Promise<string[]>;
 
 function isFailure(result: ValidationResult): result is ValidationFail {
-    return (result as ValidationFail).message !== undefined;
+    return result.type === ValidationResultType.Fail;
 }
 
 const validate: ValidateFunction<any>
@@ -27,7 +27,7 @@ const validate: ValidateFunction<any>
             if (opts.sequential) {
                 break;
             }
-        } else if (result.type === "stop") {
+        } else if (result.type === ValidationResultType.Stop) {
             break;
         }
     }
