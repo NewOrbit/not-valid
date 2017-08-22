@@ -34,15 +34,10 @@ const validate: ValidateFunction = async <T>(validators: Array<ValidationFunctio
 };
 
 const createAsyncValidator = <T>(predicate: (value: T) => Promise<boolean>, message: string) => {
-    const validationFunction: AsyncValidationFunction<T> = (value: T) => {
-        return predicate(value)
-            .then(result => {
-                if (result) {
-                    return Result.Pass;
-                }
+    const validationFunction: AsyncValidationFunction<T> = async (value: T) => {
+        const result = await predicate(value);
 
-                return Result.Fail(message);
-            });
+        return result ? Result.Pass : Result.Fail(message);
     };
 
     return validationFunction;
@@ -50,11 +45,9 @@ const createAsyncValidator = <T>(predicate: (value: T) => Promise<boolean>, mess
 
 const createValidator = <T>(predicate: ValidationPredicate<T>, message: string) => {
     const validationFunction: SyncValidationFunction<T> = (value: T) => {
-        if (predicate(value)) {
-            return Result.Pass;
-        }
+        const result = predicate(value);
 
-        return Result.Fail(message);
+        return result ? Result.Pass : Result.Fail(message);
     };
 
     return validationFunction;
