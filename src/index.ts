@@ -1,43 +1,23 @@
-import { ValidationResult, ValidationFail, Result } from "./results/";
+import { ValidationResult, ValidationFail, ValidationResultType, Result } from "./results/";
+import { getOptions, ValidationOptions } from "./options";
 
 type ValidationPredicate<T> = (value: T) => boolean;
-type ValidationFunction<T> = (value: T) => ValidationResult;
-
-interface ValidationOptions {
-    sequential?: boolean;
-}
-
-const getDefaultIfUndefined = (val: any, defaultVal: any) => val === undefined ? defaultVal : val;
-
-const DEFAULT_OPTIONS: ValidationOptions = {
-    sequential: true
-};
-
-const getOptions = (options?: ValidationOptions) => {
-    if (options === undefined) {
-        return {
-            sequential: DEFAULT_OPTIONS.sequential
-        };
-    }
-
-    return {
-        sequential: getDefaultIfUndefined(options.sequential, DEFAULT_OPTIONS.sequential)
-    };
-};
+type SyncValidationFunction<T> = (value: T) => ValidationResult;
+type AsyncValidationFunction<T> = (value: T) => Promise<ValidationResult>;
+type ValidationFunction<T> = SyncValidationFunction<T> | AsyncValidationFunction<T>;
+type ValidateFunction = <T>(validators: ValidationFunction<T>[], value: T, options?: ValidationOptions) => Promise<string[]>;
 
 function isFailure(result: ValidationResult): result is ValidationFail {
-    return (result as ValidationFail).message !== undefined;
+    return result.type === ValidationResultType.Fail;
 }
 
-const validate: <T>(validators: Array<ValidationFunction<T>>, value: T, options?: ValidationOptions) => Array<string>
-    = <T>(validators: Array<ValidationFunction<T>>, value: T, options?: ValidationOptions) => {
-
+const validate: ValidateFunction = async <T>(validators: Array<ValidationFunction<T>>, value: T, options?: ValidationOptions) => {
     const opts = getOptions(options);
 
     const errors: Array<string> = [];
 
     for (const validator of validators) {
-        const result = validator(value);
+        const result = await validator(value);
 
         if (isFailure(result)) {
             errors.push(result.message);
@@ -45,7 +25,7 @@ const validate: <T>(validators: Array<ValidationFunction<T>>, value: T, options?
             if (opts.sequential) {
                 break;
             }
-        } else if (result.type === "stop") {
+        } else if (result.type === ValidationResultType.Stop) {
             break;
         }
     }
@@ -53,25 +33,35 @@ const validate: <T>(validators: Array<ValidationFunction<T>>, value: T, options?
     return errors;
 };
 
-const createValidator: <T>(predicate: ValidationPredicate<T>, message: string) => ValidationFunction<T>
-    = <T>(predicate: ValidationPredicate<T>, message: string) => {
+const createAsyncValidator = <T>(predicate: (value: T) => Promise<boolean>, message: string) => {
+    const validationFunction: AsyncValidationFunction<T> = async (value: T) => {
+        const result = await predicate(value);
 
-    const failure = Result.Fail(message);
-
-    return (value: T) => {
-        if (predicate(value)) {
-            return Result.Pass;
-        }
-
-        return failure;
+        return result ? Result.Pass : Result.Fail(message);
     };
+
+    return validationFunction;
+};
+
+const createValidator = <T>(predicate: ValidationPredicate<T>, message: string) => {
+    const validationFunction: SyncValidationFunction<T> = (value: T) => {
+        const result = predicate(value);
+
+        return result ? Result.Pass : Result.Fail(message);
+    };
+
+    return validationFunction;
 };
 
 export {
     Result,
     ValidationPredicate,
+    AsyncValidationFunction,
+    SyncValidationFunction,
     ValidationFunction,
     ValidationOptions,
+    ValidateFunction,
     validate,
-    createValidator
+    createValidator,
+    createAsyncValidator
 };

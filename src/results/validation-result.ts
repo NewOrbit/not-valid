@@ -1,12 +1,13 @@
-import { ValidationFail } from "./";
+import { ValidationFail } from "./validation-fail";
+import { ValidationResultType } from "./validation-result-type";
 
 interface ValidationResult {
-    type: string;
+    type: ValidationResultType;
 }
 
 class Result {
-    public static Pass: ValidationResult = { type: "pass" };
-    public static Stop: ValidationResult = { type: "stop" };
+    public static Pass: ValidationResult = { type: ValidationResultType.Pass };
+    public static Stop: ValidationResult = { type: ValidationResultType.Stop };
     public static Fail: (message: string) => ValidationResult = (message: string) => new ValidationFail(message);
 }
 
