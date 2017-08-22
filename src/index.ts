@@ -1,32 +1,11 @@
 import { ValidationResult, ValidationFail, Result } from "./results/";
+import { getOptions, ValidationOptions } from "./options";
 
 type ValidationPredicate<T> = (value: T) => boolean;
 type SyncValidationFunction<T> = (value: T) => ValidationResult;
 type AsyncValidationFunction<T> = (value: T) => Promise<ValidationResult>;
 type ValidationFunction<T> = SyncValidationFunction<T> | AsyncValidationFunction<T>;
 type ValidateFunction<T> = (validators: ValidationFunction<T>[], value: T, options?: ValidationOptions) => Promise<string[]>;
-
-interface ValidationOptions {
-    sequential?: boolean;
-}
-
-const getDefaultIfUndefined = (val: any, defaultVal: any) => val === undefined ? defaultVal : val;
-
-const DEFAULT_OPTIONS: ValidationOptions = {
-    sequential: true
-};
-
-const getOptions = (options?: ValidationOptions) => {
-    if (options === undefined) {
-        return {
-            sequential: DEFAULT_OPTIONS.sequential
-        };
-    }
-
-    return {
-        sequential: getDefaultIfUndefined(options.sequential, DEFAULT_OPTIONS.sequential)
-    };
-};
 
 function isFailure(result: ValidationResult): result is ValidationFail {
     return (result as ValidationFail).message !== undefined;
