@@ -10,4 +10,3 @@ export class Result {
     public static Stop: ValidationResult = { type: ValidationResultType.Stop };
     public static Fail: (message: string) => ValidationResult = (message: string) => new ValidationFail(message);
 }
-
