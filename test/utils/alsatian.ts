@@ -1,7 +1,7 @@
-import { IExpect, Matcher, MatchError, buildExpect } from "alsatian";
+import { IExpect, MixedMatcher, MatchError, buildExpect } from "alsatian";
 import { ValidationResult, ValidationResultType, isFailure } from "../../src/results/";
 
-class ValidationResultMatcher extends Matcher<ValidationResult> {
+class ValidationResultMatcher extends MixedMatcher {
 
     public toBeAPass() {
         if (this.actualValue.type !== ValidationResultType.Pass) {
@@ -30,11 +30,16 @@ class ValidationResultMatcher extends Matcher<ValidationResult> {
             throw new MatchError("Validation result type was not a fail", ValidationResultType.Fail, this.actualValue.type);
         }
     }
-
 }
 
-const Expect = buildExpect(ValidationResultMatcher);
+interface IValidationResultExpect extends IExpect {
+    (test: ValidationResult): ValidationResultMatcher;
+}
+
+const Expect = buildExpect<IValidationResultExpect>(ValidationResultMatcher);
 
 export {
+    ValidationResultMatcher,
+    IValidationResultExpect,
     Expect
 };

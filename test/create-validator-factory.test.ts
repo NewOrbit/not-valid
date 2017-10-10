@@ -32,7 +32,7 @@ export class CreateValidatorFactoryTests {
 
         const result = validator(0); // call the validator with anything - it always fails
 
-        Expect(result).toEqual(Result.Fail(message));
+        Expect(result).toBeAFailWithMessage(message);
     }
 
 }
@@ -68,7 +68,7 @@ export class CreateAsyncValidatorFactoryTests {
 
         const result = await validator(0); // call the validator with anything - it always fails
 
-        Expect(result).toEqual(Result.Fail(message));
+        Expect(result).toBeAFailWithMessage(message);
     }
 
 }
