@@ -10,6 +10,11 @@ class ValidationFail implements ValidationResult {
     }
 }
 
+function isFailure(result: ValidationResult): result is ValidationFail {
+    return result.type === ValidationResultType.Fail;
+}
+
 export {
-    ValidationFail
+    ValidationFail,
+    isFailure
 };

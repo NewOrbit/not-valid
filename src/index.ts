@@ -1,7 +1,6 @@
 /* tslint:disable:max-line-length */
 import { ValidationResult, ValidationFail, ValidationResultType, Result } from "./results/";
 import { getOptions, ValidationOptions } from "./options";
-import { createAsyncValidator, createValidator } from "./createValidator";
 import { ValidationPredicate, SyncValidationFunction, AsyncValidationFunction, ValidateFunction, ValidationFunction } from "./types";
 
 function isFailure(result: ValidationResult): result is ValidationFail {
@@ -39,7 +38,5 @@ export {
     ValidationOptions,
     ValidateFunction,
     validate,
-    createValidator,
-    createAsyncValidator,
     ValidationResult
 };
