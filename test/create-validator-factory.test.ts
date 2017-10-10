@@ -1,4 +1,5 @@
-import { TestFixture, Test, TestCase, Expect, SpyOn, AsyncTest } from "alsatian";
+import { TestFixture, Test, TestCase, SpyOn, AsyncTest } from "alsatian";
+import { Expect } from "./utils/alsatian";
 import { Result } from "../src/index";
 import { createValidatorFactory, createAsyncValidatorFactory } from "../src/create-validator-factory";
 
