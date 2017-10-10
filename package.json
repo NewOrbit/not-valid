@@ -7,8 +7,8 @@
   "scripts": {
     "prepublish": "npm run review && npm run build",
     "build": "tsc",
-    "lint:src": "tslint -c tslint.json src/index.ts src/results/index.ts src/results/validation-fail.ts src/results/validation-result.ts",
-    "lint:test": "tslint -c tslint.json test/validate.test.ts test/create-validator.test.ts",
+    "lint:src": "tslint -c tslint.json src/**/*.ts",
+    "lint:test": "tslint -c tslint.json test/**/*.test.ts",
     "lint": "npm run lint:src && npm run lint:test",
     "test": "npm run build && alsatian \"test/**/*.test.js\"",
     "review": "npm run test && npm run lint"
