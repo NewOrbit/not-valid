@@ -1,23 +1,21 @@
 /* tslint:disable:max-line-length */
 import { ValidationResult, ValidationFail, ValidationResultType, Result } from "./results/";
 import { getOptions, ValidationOptions } from "./options";
-
-type ValidationPredicate<T> = (value: T) => boolean;
-type SyncValidationFunction<T> = (value: T) => ValidationResult;
-type AsyncValidationFunction<T> = (value: T) => Promise<ValidationResult>;
-type ValidationFunction<T> = SyncValidationFunction<T> | AsyncValidationFunction<T>;
-type ValidateFunction = <T>(validators: Array<ValidationFunction<T>>, value: T, options?: ValidationOptions) => Promise<Array<string>>;
+import { ValidationPredicate, SyncValidationFunction, AsyncValidationFunction, ValidateFunction, ValidationFunction } from "./types";
+import { createValidator, createValidatorFactory, createAsyncValidator, createAsyncValidatorFactory } from "./create-validator";
+import * as messages from "./messages";
+import * as validators from "./validators";
 
 function isFailure(result: ValidationResult): result is ValidationFail {
     return result.type === ValidationResultType.Fail;
 }
 
-const validate: ValidateFunction = async <T> (validators: Array<ValidationFunction<T>>, value: T, options?: ValidationOptions) => {
+const validate: ValidateFunction = async <T> (validationFuncs: ValidationFunction<T>[], value: T, options?: ValidationOptions) => {
     const opts = getOptions(options);
 
-    const errors: Array<string> = [];
+    const errors: string[] = [];
 
-    for (const validator of validators) {
+    for (const validator of validationFuncs) {
         const result = await validator(value);
 
         if (isFailure(result)) {
@@ -34,26 +32,6 @@ const validate: ValidateFunction = async <T> (validators: Array<ValidationFuncti
     return errors;
 };
 
-const createAsyncValidator = <T>(predicate: (value: T) => Promise<boolean>, message: string) => {
-    const validationFunction: AsyncValidationFunction<T> = async (value: T) => {
-        const result = await predicate(value);
-
-        return result ? Result.Pass : Result.Fail(message);
-    };
-
-    return validationFunction;
-};
-
-const createValidator = <T>(predicate: ValidationPredicate<T>, message: string) => {
-    const validationFunction: SyncValidationFunction<T> = (value: T) => {
-        const result = predicate(value);
-
-        return result ? Result.Pass : Result.Fail(message);
-    };
-
-    return validationFunction;
-};
-
 export {
     Result,
     ValidationPredicate,
@@ -63,6 +41,11 @@ export {
     ValidationOptions,
     ValidateFunction,
     validate,
+    ValidationResult,
     createValidator,
-    createAsyncValidator
+    createValidatorFactory,
+    createAsyncValidator,
+    createAsyncValidatorFactory,
+    messages,
+    validators
 };
