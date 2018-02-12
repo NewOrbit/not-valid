@@ -4,17 +4,18 @@ import { getOptions, ValidationOptions } from "./options";
 import { ValidationPredicate, SyncValidationFunction, AsyncValidationFunction, ValidateFunction, ValidationFunction } from "./types";
 import { createValidator, createValidatorFactory, createAsyncValidator, createAsyncValidatorFactory } from "./create-validator";
 import * as messages from "./messages";
+import * as validators from "./validators";
 
 function isFailure(result: ValidationResult): result is ValidationFail {
     return result.type === ValidationResultType.Fail;
 }
 
-const validate: ValidateFunction = async <T> (validators: ValidationFunction<T>[], value: T, options?: ValidationOptions) => {
+const validate: ValidateFunction = async <T> (validationFuncs: ValidationFunction<T>[], value: T, options?: ValidationOptions) => {
     const opts = getOptions(options);
 
     const errors: string[] = [];
 
-    for (const validator of validators) {
+    for (const validator of validationFuncs) {
         const result = await validator(value);
 
         if (isFailure(result)) {
@@ -45,5 +46,6 @@ export {
     createValidatorFactory,
     createAsyncValidator,
     createAsyncValidatorFactory,
-    messages
+    messages,
+    validators
 };
