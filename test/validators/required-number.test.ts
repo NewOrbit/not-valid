@@ -17,6 +17,8 @@ export class RequiredNumberTests {
     @TestCase(null)
     @TestCase("ten")
     @TestCase(false)
+    @TestCase(NaN)
+    @TestCase(Infinity)
     public shouldFailForInvalidNumber(value: any) {
         const failureMessage = "failure message";
         const validator = requiredNumber(failureMessage);
