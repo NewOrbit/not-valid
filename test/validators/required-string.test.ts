@@ -10,9 +10,7 @@ export class RequiredStringTests {
     @TestCase("1487358")
     public shouldPassForValidString(value: string) {
         const validator = requiredString("failure message");
-
         const results = validator(value);
-
         Expect(results).toBeAPass();
     }
 
@@ -25,10 +23,7 @@ export class RequiredStringTests {
     public shouldFailForInvalidString(value: any) {
         const failureMessage = "failure message";
         const validator = requiredString(failureMessage);
-
         const results = validator(value);
-
         Expect(results).toBeAFailWithMessage(failureMessage);
     }
-
 }

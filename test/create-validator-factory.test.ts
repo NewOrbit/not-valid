@@ -1,7 +1,8 @@
+// tslint:disable max-classes-per-file
 import { TestFixture, Test, TestCase, SpyOn, AsyncTest } from "alsatian";
 import { Expect } from "./utils/alsatian";
 import { Result } from "../src/index";
-import { createValidatorFactory, createAsyncValidatorFactory } from "../src/create-validator-factory";
+import { createValidatorFactory, createAsyncValidatorFactory } from "../src/create-validator";
 
 @TestFixture()
 export class CreateValidatorFactoryTests {
@@ -10,14 +11,13 @@ export class CreateValidatorFactoryTests {
     @TestCase((y: number) => y === y * 2)
     public shouldUseCorrectPredicate(predicate: () => boolean) {
         const spyWrapper = {
-            predicate: predicate
+            predicate
         };
 
         SpyOn(spyWrapper, "predicate");
 
-        const factory = createValidatorFactory(spyWrapper.predicate);
+        const factory = createValidatorFactory(spyWrapper.predicate, "default message");
         const validator = factory("some message");
-        
         const input = 0;
         validator(input);
 
@@ -27,7 +27,7 @@ export class CreateValidatorFactoryTests {
     @TestCase("message one")
     @TestCase("another message")
     public shouldFailWithCorrectMessage(message: string) {
-        const factory = createValidatorFactory(() => false); // create a validator that always fails
+        const factory = createValidatorFactory(() => false, "default message"); // create a validator that always fails
         const validator = factory(message);
 
         const result = validator(0); // call the validator with anything - it always fails
@@ -45,14 +45,14 @@ export class CreateAsyncValidatorFactoryTests {
     @TestCase(async (y: number) => y === y * 2)
     public async shouldUseCorrectPredicate(predicate: () => Promise<boolean>) {
         const spyWrapper = {
-            predicate: predicate
+            predicate
         };
 
         SpyOn(spyWrapper, "predicate");
 
-        const factory = createAsyncValidatorFactory(spyWrapper.predicate);
+        const factory = createAsyncValidatorFactory(spyWrapper.predicate, "default message");
         const validator = factory("some message");
-        
+
         const input = 0;
         await validator(input);
 
@@ -63,12 +63,10 @@ export class CreateAsyncValidatorFactoryTests {
     @TestCase("message one")
     @TestCase("another message")
     public async shouldFailWithCorrectMessage(message: string) {
-        const factory = createAsyncValidatorFactory(async () => false); // create a validator that always fails
+        const factory = createAsyncValidatorFactory(async () => false, "default message"); // create a validator that always fails
         const validator = factory(message);
-
         const result = await validator(0); // call the validator with anything - it always fails
 
         Expect(result).toBeAFailWithMessage(message);
     }
-
 }

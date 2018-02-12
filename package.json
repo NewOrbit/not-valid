@@ -32,9 +32,9 @@
   "homepage": "https://github.com/NewOrbit/NewOrbit.validation#readme",
   "dependencies": {},
   "devDependencies": {
-    "@neworbit/tslint-config": "0.0.6",
-    "alsatian": "^2.0.0",
-    "tslint": "^5.2.0",
-    "typescript": "^2.4.2"
+    "@neworbit/tslint-config": "^1.0.0",
+    "alsatian": "^2.1.0",
+    "tslint": "^5.9.1",
+    "typescript": "^2.7.1"
   }
 }

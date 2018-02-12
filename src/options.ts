@@ -23,4 +23,4 @@ const getOptions = (options?: ValidationOptions) => {
 export {
     ValidationOptions,
     getOptions
-}
+};

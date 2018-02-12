@@ -9,9 +9,7 @@ export class ValidDrivingLicenseTests {
     @TestCase("XYZAS281944IFJEE94")
     public shouldPassForValidDrivingLicence(value: string) {
         const validator = validDrivingLicence("failure message");
-
         const results = validator(value);
-
         Expect(results).toBeAPass();
     }
 
@@ -22,10 +20,7 @@ export class ValidDrivingLicenseTests {
     public shouldFailForInvalidDrivingLicence(value: any) {
         const failureMessage = "failure message";
         const validator = validDrivingLicence(failureMessage);
-
         const results = validator(value);
-
         Expect(results).toBeAFailWithMessage(failureMessage);
     }
-
 }
