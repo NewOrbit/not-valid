@@ -1,6 +1,6 @@
 import { ValidationResult } from "../results/validation-result";
 import { createValidatorFactory } from "../create-validator";
-﻿import { INVALID_SORT_CODE } from "../messages";
+import { INVALID_SORT_CODE } from "../messages";
 
 const SORT_CODE_REGEX = /\d{6}/;
 

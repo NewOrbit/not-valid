@@ -7,7 +7,7 @@
   "scripts": {
     "prepublish": "npm run review && npm run build",
     "build": "tsc",
-    "lint:src": "tslint -c tslint.json src/**/*.ts",
+    "lint:src": "tslint -c tslint.json src/**/*.ts -e src/**/*.d.ts",
     "lint:test": "tslint -c tslint.json test/**/*.test.ts",
     "lint": "npm run lint:src && npm run lint:test",
     "test": "npm run build && alsatian \"test/**/*.test.js\"",

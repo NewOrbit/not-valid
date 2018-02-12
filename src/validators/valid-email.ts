@@ -1,6 +1,6 @@
 import { ValidationResult } from "../results/validation-result";
 import { createValidatorFactory } from "../create-validator";
-﻿import { INVALID_EMAIL } from "../messages";
+import { INVALID_EMAIL } from "../messages";
 
 // tslint:disable max-line-length
 const EMAIL_REGEX =

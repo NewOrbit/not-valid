@@ -6,4 +6,4 @@ enum ValidationResultType {
 
 export {
     ValidationResultType
-}
+};
