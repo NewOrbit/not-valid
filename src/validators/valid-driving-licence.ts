@@ -55,16 +55,18 @@ function createWithString(message?: string) {
 
 /**
  * Creates a driving licence validator with the default options and the provided message, or the default message if none is provided.
- * @param  {string} message The error message
+ * @param  {string} message The error message.
  */
 function create(message?: string): SyncValidationFunction<string>;
 
+// tslint:disable:max-line-length
 /**
  * Creates a driving licence validator with the provided options.
  * @param {string} options.message A custom error message.
  * @param {string} options.allowNI Whether to allow Northern Ireland number formats. Default: false.
- * @param {IssueNumberOptions} options.message How to treat the issue number (the last two digits). Default: "optional".
+ * @param {IssueNumberOptions} options.issueNumber How to treat the issue number (the last two digits). Valid options: "optional" (default), "required", "prohibited".
  */
+// tslint:enable:max-line-length
 function create(options: DrivingLicenceOptions): SyncValidationFunction<string>;
 
 function create(messageOrOptions?: string | DrivingLicenceOptions): SyncValidationFunction<string> {
