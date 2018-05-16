@@ -1,8 +1,7 @@
-import { AsyncTest, Test, TestCase, TestFixture, FocusTests } from "alsatian";
+import { Test, TestCase, TestFixture } from "alsatian";
 import { Expect } from "../utils/alsatian";
 import { validLength } from "../../src/validators/valid-length";
 
-@FocusTests
 @TestFixture("ValidLength")
 export class ValidLengthTests {
 
