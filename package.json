@@ -30,7 +30,9 @@
     "url": "https://github.com/NewOrbit/NewOrbit.validation/issues"
   },
   "homepage": "https://github.com/NewOrbit/NewOrbit.validation#readme",
-  "dependencies": {},
+  "dependencies": {
+    "valid-nino": "^1.0.0"
+  },
   "devDependencies": {
     "@neworbit/tslint-config": "^1.0.0",
     "@types/node": "6.0.106",
