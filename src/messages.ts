@@ -7,3 +7,4 @@ export const INVALID_SORT_CODE = "Please enter a valid sort code";
 export const DRIVING_LICENCE = "Enter a valid driving licence number";
 export const VALID_MONETARY_VALUE = "Please enter a valid monetary value";
 export const ONE_VALUE_REQUIRED = "Please fill in at least 1 of these fields";
+export const INVALID_NI_NUMBER = "Please enter a valid national insurance number";
