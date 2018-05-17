@@ -1,6 +1,6 @@
 {
   "name": "@neworbit/validation",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "NewOrbit validation",
   "main": "src/index.js",
   "typings": "src/index.d.ts",
@@ -30,9 +30,12 @@
     "url": "https://github.com/NewOrbit/NewOrbit.validation/issues"
   },
   "homepage": "https://github.com/NewOrbit/NewOrbit.validation#readme",
-  "dependencies": {},
+  "dependencies": {
+    "valid-nino": "^1.0.0"
+  },
   "devDependencies": {
     "@neworbit/tslint-config": "^1.0.0",
+    "@types/node": "6.0.106",
     "alsatian": "^2.1.0",
     "tslint": "^5.9.1",
     "typescript": "^2.7.1"

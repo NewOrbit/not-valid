@@ -4,6 +4,8 @@ import requiredNumber from "./required-number";
 import validSortCode from "./valid-sort-code";
 import validOption from "./valid-option";
 import drivingLicenceUk from "./valid-driving-licence";
+import validNiNumber from "./valid-ni-number";
+import { validLength } from "./valid-length";
 
 export {
     drivingLicenceUk,
@@ -11,5 +13,7 @@ export {
     validEmail,
     requiredNumber,
     validSortCode,
-    validOption
+    validOption,
+    validNiNumber,
+    validLength
 };
