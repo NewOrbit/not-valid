@@ -17,6 +17,7 @@ export class ValidSortCodeTests {
     @TestCase(null)
     @TestCase("ten")
     @TestCase(false)
+    @TestCase("1234567")
     @TestCase("12345")
     @TestCase("1234")
     @TestCase("123")
