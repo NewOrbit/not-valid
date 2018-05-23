@@ -34,9 +34,9 @@
     "valid-nino": "^1.0.0"
   },
   "devDependencies": {
-    "@neworbit/tslint-config": "^1.0.0",
     "@types/node": "6.0.106",
     "alsatian": "^2.1.0",
+    "neworbit-tslint-config": "^2.0.0",
     "tslint": "^5.9.1",
     "typescript": "^2.7.1"
   }
