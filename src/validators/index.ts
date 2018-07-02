@@ -6,6 +6,7 @@ import validOption from "./valid-option";
 import drivingLicenceUk from "./valid-driving-licence";
 import validNiNumber from "./valid-ni-number";
 import { validLength } from "./valid-length";
+import validPhoneNumber from "./valid-phone-number";
 
 export {
     drivingLicenceUk,
@@ -15,5 +16,6 @@ export {
     validSortCode,
     validOption,
     validNiNumber,
-    validLength
+    validLength,
+    validPhoneNumber
 };
