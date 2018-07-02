@@ -1,16 +1,17 @@
 import { ValidationResult } from "../results/validation-result";
-import { createValidatorFactory } from "../create-validator";
 import { INVALID_PHONE_NUMBER } from "../messages";
+import { createValidator } from "..";
 
-const PHONE_NUMBER_REGEX = /^(0{0,2}|\+|[1-9])[1-9]\d{7,}$/;
+const PHONE_NUMBER_REGEX = /^(0{0,2}|\+|[1-9])[1-9]\d*$/;
 
-export default createValidatorFactory<string>(
-    phoneNumber => {
+export default (minLength: number, message?: string) => {
+    return createValidator<string>((phoneNumber: string) => {
         phoneNumber = phoneNumber.replace(/ /g, "");
-        if (phoneNumber.length < 10) {
+        if (phoneNumber.length < minLength) {
             return false;
         }
 
         return !phoneNumber || PHONE_NUMBER_REGEX.test(phoneNumber);
     },
-    INVALID_PHONE_NUMBER);
+    message || INVALID_PHONE_NUMBER);
+}
