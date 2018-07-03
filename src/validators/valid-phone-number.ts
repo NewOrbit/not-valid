@@ -14,4 +14,4 @@ export default (minLength: number, message?: string) => {
         return !phoneNumber || PHONE_NUMBER_REGEX.test(phoneNumber);
     },
     message || INVALID_PHONE_NUMBER);
-}
+};
