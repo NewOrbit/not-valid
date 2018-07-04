@@ -10,6 +10,7 @@ export class ValidDrivingLicenseTests {
     @TestCase("XYZAS281944IFJEE94")
     @TestCase("ABCDE948174AB1DE")
     @TestCase("XYZAS281944IFJEE")
+    @TestCase("")
     public shouldPassForValidDrivingLicence(value: string) {
         const validator = validDrivingLicence("failure message");
         const results = validator(value);

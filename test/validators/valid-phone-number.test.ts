@@ -1,7 +1,6 @@
 import { TestFixture, Test, TestCase } from "alsatian";
 import { Expect } from "../utils/alsatian";
 import validPhoneNumber from "../../src/validators/valid-phone-number";
-import { INVALID_PHONE_NUMBER } from "../../src/messages";
 
 @TestFixture()
 export class RequiredNumberTests {
@@ -12,6 +11,7 @@ export class RequiredNumberTests {
     @TestCase("01460371140", 10)
     @TestCase("01460 371140", 10)
     @TestCase("014", 3)
+    @TestCase("", 10)
     public shouldPassForValidNumber(value: string, minLength: number) {
         const validator = validPhoneNumber(minLength);
         const results = validator(value);
