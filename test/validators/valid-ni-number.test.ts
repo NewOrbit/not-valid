@@ -25,7 +25,7 @@ export class ValidNINumberTests {
     @TestCase("ZZ0123456C")
     @TestCase("A1234")
     @Test("should fail for invalid length")
-    public shouldFailForInvalidLength(min: number, max: number, value: string) {
+    public shouldFailForInvalidLength(value: string) {
         const message = "Invalid NI Number";
 
         const validator = validNiNumber(message);
