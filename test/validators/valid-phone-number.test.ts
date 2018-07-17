@@ -12,6 +12,8 @@ export class RequiredNumberTests {
     @TestCase("01460 371140", 10)
     @TestCase("014", 3)
     @TestCase("", 10)
+    @TestCase(null, 10)
+    @TestCase(undefined, 10)
     public shouldPassForValidNumber(value: string, minLength: number) {
         const validator = validPhoneNumber(minLength);
         const results = validator(value);

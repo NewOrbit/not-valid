@@ -9,6 +9,8 @@ export class ValidNINumberTests {
     @TestCase("CC987654D")
     @TestCase("ZA100000 ")
     @TestCase("")
+    @TestCase(null)
+    @TestCase(undefined)
     @Test("should pass for valid NI Number")
     public shouldPassForValidNINumber(niNumber: string) {
         const message = "Invalid NI Number";

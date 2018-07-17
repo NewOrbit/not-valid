@@ -11,16 +11,15 @@ export class ValidDrivingLicenseTests {
     @TestCase("ABCDE948174AB1DE")
     @TestCase("XYZAS281944IFJEE")
     @TestCase("")
+    @TestCase(undefined)
+    @TestCase(null)
     public shouldPassForValidDrivingLicence(value: string) {
         const validator = validDrivingLicence("failure message");
         const results = validator(value);
         Expect(results).toBeAPass();
     }
 
-    @TestCase(undefined)
-    @TestCase(null)
     @TestCase("     ")
-    @TestCase(false)
     @TestCase("ABCDE948174ABCD")
     @TestCase("12345AAAAA12ABC")
     @TestCase("fooABCDE948174ABCDE12bar")
