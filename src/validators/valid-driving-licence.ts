@@ -46,7 +46,7 @@ function validate(value: string, options: DrivingLicenceOptions) {
 }
 
 function createWithOptions(options = defaultOptions) {
-    return createValidator<string>(x => validate(x, options), options.message || DRIVING_LICENCE);
+    return createValidator<string>(x => !x || validate(x, options), options.message || DRIVING_LICENCE);
 }
 
 function createWithString(message?: string) {

@@ -7,16 +7,16 @@ export class ValidSortCodeTests {
 
     @TestCase("123456")
     @TestCase("345612")
+    @TestCase("")
+    @TestCase(undefined)
+    @TestCase(null)
     public shouldPassForValidSortCode(value: string) {
         const validator = validSortCode("failure message");
         const results = validator(value);
         Expect(results).toBeAPass();
     }
 
-    @TestCase(undefined)
-    @TestCase(null)
     @TestCase("ten")
-    @TestCase(false)
     @TestCase("1234567")
     @TestCase("12345")
     @TestCase("1234")

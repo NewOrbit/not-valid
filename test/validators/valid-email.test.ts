@@ -15,6 +15,7 @@ export class ValidEmailTests {
     @TestCase("-foo@example.com")
     @TestCase("foo-@example.com")
     @TestCase("!#$%&'*+-/=?^_`{|}~@example.com")
+    @TestCase("")
     public shouldPassForValidEmail(value: string) {
         const validator = validEmail("failure message");
         const results = validator(value);
