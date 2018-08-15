@@ -7,6 +7,7 @@ import drivingLicenceUk from "./valid-driving-licence";
 import validNiNumber from "./valid-ni-number";
 import { validLength } from "./valid-length";
 import validPhoneNumber from "./valid-phone-number";
+import { validAlphanumeric } from "./valid-alphanumeric";
 
 export {
     drivingLicenceUk,
@@ -17,5 +18,6 @@ export {
     validOption,
     validNiNumber,
     validLength,
-    validPhoneNumber
+    validPhoneNumber,
+    validAlphanumeric
 };

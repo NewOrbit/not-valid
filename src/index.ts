@@ -3,6 +3,7 @@ import { ValidationResult, ValidationFail, ValidationResultType, Result } from "
 import { getOptions, ValidationOptions } from "./options";
 import { ValidationPredicate, SyncValidationFunction, AsyncValidationFunction, ValidateFunction, ValidationFunction } from "./types";
 import { createValidator, createValidatorFactory, createAsyncValidator, createAsyncValidatorFactory } from "./create-validator";
+import { createRegexValidator } from "./create-regex-validator";
 import * as messages from "./messages";
 import * as validators from "./validators";
 
@@ -46,6 +47,7 @@ export {
     createValidatorFactory,
     createAsyncValidator,
     createAsyncValidatorFactory,
+    createRegexValidator,
     messages,
     validators
 };
