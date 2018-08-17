@@ -8,6 +8,8 @@ import validNiNumber from "./valid-ni-number";
 import { validLength } from "./valid-length";
 import validPhoneNumber from "./valid-phone-number";
 import { validAlphanumeric } from "./valid-alphanumeric";
+import { validBankAccountNumber } from "./valid-bank-account-number";
+import { validVatNumber } from "./valid-vat-number";
 
 export {
     drivingLicenceUk,
@@ -19,5 +21,7 @@ export {
     validNiNumber,
     validLength,
     validPhoneNumber,
-    validAlphanumeric
+    validAlphanumeric,
+    validBankAccountNumber,
+    validVatNumber
 };
