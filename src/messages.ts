@@ -9,3 +9,5 @@ export const VALID_MONETARY_VALUE = "Please enter a valid monetary value";
 export const ONE_VALUE_REQUIRED = "Please fill in at least 1 of these fields";
 export const INVALID_NI_NUMBER = "Please enter a valid national insurance number";
 export const VALID_ALPHANUMERIC = "Please use only numbers and letters";
+export const VALID_ACCOUNT_NUMBER = "Please enter a valid account number";
+export const VALID_VAT_NUMBER = "Please enter a valid VAT number";
