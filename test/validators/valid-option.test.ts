@@ -1,6 +1,6 @@
 import { TestFixture, Test, TestCase } from "alsatian";
 import { Expect } from "../utils/alsatian";
-import validOption from "../../src/validators/valid-option";
+import { validOption } from "../../src/validators/valid-option";
 
 const options = [
     {

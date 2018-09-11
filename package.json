@@ -1,35 +1,35 @@
 {
-  "name": "@neworbit/validation",
-  "version": "4.2.1",
-  "description": "NewOrbit validation",
-  "main": "src/index.js",
-  "typings": "src/index.d.ts",
+  "name": "not-valid",
+  "version": "1.0.0",
+  "description": "Composable message-based validation",
+  "main": "bin/index.js",
+  "typings": "bin/index.d.ts",
   "scripts": {
-    "prepublish": "npm run review && npm run build",
+    "prepublishOnly": "npm run review && npm run build",
     "build": "tsc",
+    "build:test": "tsc -p tsconfig.test.json",
     "lint:src": "tslint -c tslint.json src/**/*.ts -e src/**/*.d.ts",
-    "lint:test": "tslint -c tslint.json test/**/*.test.ts",
+    "lint:test": "tslint -c tslint.json test/**/*.ts",
     "lint": "npm run lint:src && npm run lint:test",
-    "test": "npm run build && alsatian \"test/**/*.test.js\"",
+    "test": "npm run build:test && alsatian \"bin-test/**/*.test.js\"",
     "review": "npm run test && npm run lint"
   },
   "files": [
-    "src/**/*.js",
-    "src/**/*.d.ts"
+    "bin"
   ],
   "keywords": [
     "validation"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "author": "NewOrbit Ltd",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NewOrbit/NewOrbit.validation.git"
+    "url": "git+https://github.com/NewOrbit/not-valid.git"
   },
   "bugs": {
-    "url": "https://github.com/NewOrbit/NewOrbit.validation/issues"
+    "url": "https://github.com/NewOrbit/not-valid/issues"
   },
-  "homepage": "https://github.com/NewOrbit/NewOrbit.validation#readme",
+  "homepage": "https://github.com/NewOrbit/not-valid#readme",
   "dependencies": {
     "valid-nino": "^1.0.0"
   },

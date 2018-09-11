@@ -1,6 +1,6 @@
 import { TestCase, TestFixture } from "alsatian";
 import { Expect } from "../utils/alsatian";
-import { validVatNumber } from "../../src/validators/valid-vat-number";
+import { validVATNumber } from "../../src/validators/valid-vat-number";
 
 @TestFixture("ValidAccountNumber")
 export class ValidAccountNumberTests {
@@ -10,7 +10,7 @@ export class ValidAccountNumberTests {
     @TestCase(undefined)
     @TestCase(null)
     public shouldPassForValidAccountNumber(value: string) {
-        const validator = validVatNumber("invalid vat number");
+        const validator = validVATNumber("invalid vat number");
         const results = validator(value);
         Expect(results).toBeAPass();
     }
@@ -20,7 +20,7 @@ export class ValidAccountNumberTests {
     @TestCase("1234abcd")
     public shouldFailForInvalidVatNumber(value: string) {
         const failureMessage = "invalid vat number";
-        const validator = validVatNumber(failureMessage);
+        const validator = validVATNumber(failureMessage);
         const results = validator(value);
         Expect(results).toBeAFailWithMessage(failureMessage);
     }

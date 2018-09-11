@@ -1,6 +1,6 @@
 import { TestFixture, Test, TestCase } from "alsatian";
 import { Expect } from "../utils/alsatian";
-import validSortCode from "../../src/validators/valid-sort-code";
+import { validSortCode } from "../../src/validators/valid-sort-code";
 
 @TestFixture()
 export class ValidSortCodeTests {

@@ -1,6 +1,6 @@
 import { TestFixture, Test, TestCase } from "alsatian";
 import { Expect } from "../utils/alsatian";
-import requiredNumber from "../../src/validators/required-number";
+import { requiredNumber } from "../../src/validators/required-number";
 
 @TestFixture()
 export class RequiredNumberTests {

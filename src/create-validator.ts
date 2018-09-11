@@ -1,5 +1,5 @@
-import { ValidationResult, Result } from "./results/validation-result";
-import { ValidationPredicate, AsyncValidationFunction, SyncValidationFunction } from "./types";
+import { Result } from "./results/validation-result";
+import { ValidationPredicate } from "./types";
 
 export const createValidator = <T>(predicate: ValidationPredicate<T>, message: string) => {
     return (value: T) => {

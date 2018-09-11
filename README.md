@@ -1,15 +1,17 @@
-# @neworbit/validation
+# not-valid
+
+Composable message-based validation
 
 ## Installation
 
-    $ npm install @neworbit/validation --save
+    $ npm install not-valid --save
 
 ## Usage
 
 ### Overview
 
 ```typescript
-import { validate } from "@neworbit/validation";
+import { validate } from "not-valid";
 
 // Use createValidator to specify a rule and the message given for breaking that rule
 const mustContainA = createValidator<string>(v => v.indexOf("A") !== -1, "Value must contain the letter 'a'");
@@ -33,14 +35,41 @@ validate([
 ], "Too long a string, they say!"); // [ "Value must contain 'Z'", "Value must have length between 2 and 6" ]
 ```
 
+### Validators
+
+A number of validation functions come bundled with this package. You can use them like so:
+
+```typescript
+import { validators } from "not-valid";
+
+validate([
+    validators.validLength({ min: 6, max: 12 })
+], "Good value");
+```
+
+The validators included are as follows:
+
+- `requiredString`
+- `requiredNumber`
+- `validLength`
+- `validEmail`
+- `validAlphaNumeric`
+- `validOption`
+- `validPhoneNumber`
+- `validNINumber`
+- `validUKDrivingLicence`
+- `validSortCode`
+- `validBankAccountNumber`
+- `validVATNumber`
+
 ### Creating validation functions
 
 A validation function must take in a value `value`, and return `Result.Pass` if `value` is valid, or `Result.Fail(message)` is `value` is invalid. They can also return `Result.Stop`, which will silently stop the validation cycle (no more errors).
 
-This can be done with the helper method `createValidator` in `@neworbit/validation`:
+This can be done with the helper method `createValidator` in `not-valid`:
 
 ```typescript
-import { createValidator } from "@neworbit/validation";
+import { createValidator } from "not-valid";
 
 const mustContainA = createValidator<string>(v => v.indexOf("A") !== -1, "Value must contain the letter 'a'");
 ```

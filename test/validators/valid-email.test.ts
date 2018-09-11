@@ -1,6 +1,6 @@
 import { TestFixture, Test, TestCase } from "alsatian";
 import { Expect } from "../utils/alsatian";
-import validEmail from "../../src/validators/valid-email";
+import { validEmail } from "../../src/validators/valid-email";
 
 @TestFixture()
 export class ValidEmailTests {
