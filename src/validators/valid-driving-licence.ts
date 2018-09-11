@@ -57,7 +57,7 @@ function createWithString(message?: string) {
  * Creates a driving licence validator with the default options and the provided message, or the default message if none is provided.
  * @param  {string} message The error message.
  */
-function create(message?: string): SyncValidationFunction<string>;
+function drivingLicenceUk(message?: string): SyncValidationFunction<string>;
 
 // tslint:disable:max-line-length
 /**
@@ -67,12 +67,12 @@ function create(message?: string): SyncValidationFunction<string>;
  * @param {IssueNumberOptions} options.issueNumber How to treat the issue number (the last two digits). Valid options: "optional" (default), "required", "prohibited".
  */
 // tslint:enable:max-line-length
-function create(options: DrivingLicenceOptions): SyncValidationFunction<string>;
+function drivingLicenceUk(options: DrivingLicenceOptions): SyncValidationFunction<string>;
 
-function create(messageOrOptions?: string | DrivingLicenceOptions): SyncValidationFunction<string> {
+function drivingLicenceUk(messageOrOptions?: string | DrivingLicenceOptions): SyncValidationFunction<string> {
     return typeof messageOrOptions === "string"
         ? createWithString(messageOrOptions as string)
         : createWithOptions(messageOrOptions as DrivingLicenceOptions);
 }
 
-export default create;
+export { drivingLicenceUk };

@@ -1,10 +1,9 @@
-import { ValidationResult } from "../results/validation-result";
 import { INVALID_PHONE_NUMBER } from "../messages";
 import { createValidator } from "..";
 
 const PHONE_NUMBER_REGEX = /^(0{0,2}|\+|[1-9])[1-9]\d*$/;
 
-export default (minLength: number, message?: string) => {
+export const validPhoneNumber = (minLength: number, message?: string) => {
     return createValidator<string>((phoneNumber: string) => {
         if (!phoneNumber) {
             return true;
