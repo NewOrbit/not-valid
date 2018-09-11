@@ -108,3 +108,7 @@ validate([ something, another ], 5, { sequential: false });
 ```
 
 If `something` fails validation, `another` will not be called.
+
+## License
+
+Made with :sparkling_heart: by [NewOrbit](https://www.neworbit.co.uk/) in Oxfordshire, and licensed under the [MIT Licence](LICENCE)
