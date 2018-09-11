@@ -1,4 +1,3 @@
-import { ValidationResult } from "../results/validation-result";
 import { createValidator } from "../create-validator";
 
 export interface ValidLengthOptions {

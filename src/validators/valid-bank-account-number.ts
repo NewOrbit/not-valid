@@ -1,4 +1,3 @@
-import { ValidationResult } from "../results/validation-result";
 import { createRegexValidator } from "../create-regex-validator";
 import { INVALID_BANK_ACCOUNT_NUMBER } from "../messages";
 

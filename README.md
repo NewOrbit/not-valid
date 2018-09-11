@@ -40,7 +40,7 @@ validate([
 A number of validation functions come bundled with this package. You can use them like so:
 
 ```typescript
-import { validators } from "@neworbit/validation";
+import { validators } from "not-valid";
 
 validate([
     validators.validLength({ min: 6, max: 12 })
