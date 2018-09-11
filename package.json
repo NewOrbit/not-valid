@@ -1,5 +1,5 @@
 {
-  "name": "rule-book",
+  "name": "not-valid",
   "version": "1.0.0",
   "description": "Composable message-based validation",
   "main": "bin/index.js",
@@ -24,12 +24,12 @@
   "author": "NewOrbit Ltd",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NewOrbit/rule-book.git"
+    "url": "git+https://github.com/NewOrbit/not-valid.git"
   },
   "bugs": {
-    "url": "https://github.com/NewOrbit/rule-book/issues"
+    "url": "https://github.com/NewOrbit/not-valid/issues"
   },
-  "homepage": "https://github.com/NewOrbit/rule-book#readme",
+  "homepage": "https://github.com/NewOrbit/not-valid#readme",
   "dependencies": {
     "valid-nino": "^1.0.0"
   },

@@ -1,17 +1,17 @@
-# rule-book
+# not-valid
 
 Composable message-based validation
 
 ## Installation
 
-    $ npm install rule-book --save
+    $ npm install not-valid --save
 
 ## Usage
 
 ### Overview
 
 ```typescript
-import { validate } from "rule-book";
+import { validate } from "not-valid";
 
 // Use createValidator to specify a rule and the message given for breaking that rule
 const mustContainA = createValidator<string>(v => v.indexOf("A") !== -1, "Value must contain the letter 'a'");
@@ -55,6 +55,7 @@ The validators included are as follows:
 - `validEmail`
 - `validAlphaNumeric`
 - `validOption`
+- `validPhoneNumber`
 - `validNINumber`
 - `validUKDrivingLicence`
 - `validSortCode`
@@ -65,10 +66,10 @@ The validators included are as follows:
 
 A validation function must take in a value `value`, and return `Result.Pass` if `value` is valid, or `Result.Fail(message)` is `value` is invalid. They can also return `Result.Stop`, which will silently stop the validation cycle (no more errors).
 
-This can be done with the helper method `createValidator` in `rule-book`:
+This can be done with the helper method `createValidator` in `not-valid`:
 
 ```typescript
-import { createValidator } from "rule-book";
+import { createValidator } from "not-valid";
 
 const mustContainA = createValidator<string>(v => v.indexOf("A") !== -1, "Value must contain the letter 'a'");
 ```
