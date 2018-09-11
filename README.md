@@ -35,6 +35,32 @@ validate([
 ], "Too long a string, they say!"); // [ "Value must contain 'Z'", "Value must have length between 2 and 6" ]
 ```
 
+### Validators
+
+A number of validation functions come bundled with this package. You can use them like so:
+
+```typescript
+import { validators } from "@neworbit/validation";
+
+validate([
+    validators.validLength({ min: 6, max: 12 })
+], "Good value");
+```
+
+The validators included are as follows:
+
+- `requiredString`
+- `requiredNumber`
+- `validLength`
+- `validEmail`
+- `validAlphaNumeric`
+- `validOption`
+- `validNINumber`
+- `validUKDrivingLicence`
+- `validSortCode`
+- `validBankAccountNumber`
+- `validVATNumber`
+
 ### Creating validation functions
 
 A validation function must take in a value `value`, and return `Result.Pass` if `value` is valid, or `Result.Fail(message)` is `value` is invalid. They can also return `Result.Stop`, which will silently stop the validation cycle (no more errors).
