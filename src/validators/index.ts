@@ -10,7 +10,7 @@ import { validLength } from "./valid-length";
 import { validPhoneNumber } from "./valid-phone-number";
 import { validAlphanumeric } from "./valid-alphanumeric";
 import { validBankAccountNumber } from "./valid-bank-account-number";
-import { validVatNumber } from "./valid-vat-number";
+import { validVATNumber } from "./valid-vat-number";
 
 export {
     validUKDrivingLicence,
@@ -24,5 +24,5 @@ export {
     validPhoneNumber,
     validAlphanumeric,
     validBankAccountNumber,
-    validVatNumber
+    validVATNumber
 };
