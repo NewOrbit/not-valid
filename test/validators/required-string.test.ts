@@ -1,6 +1,6 @@
 import { TestFixture, Test, TestCase } from "alsatian";
 import { Expect } from "../utils/alsatian";
-import requiredString from "../../src/validators/required-string";
+import { requiredString } from "../../src/validators/required-string";
 
 @TestFixture()
 export class RequiredStringTests {

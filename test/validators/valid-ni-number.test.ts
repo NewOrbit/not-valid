@@ -1,6 +1,6 @@
 import { Test, TestCase, TestFixture } from "alsatian";
 import { Expect } from "../utils/alsatian";
-import validNiNumber from "../../src/validators/valid-ni-number";
+import { validNINumber } from "../../src/validators/valid-ni-number";
 
 @TestFixture("ValidNINumber")
 export class ValidNINumberTests {
@@ -15,7 +15,7 @@ export class ValidNINumberTests {
     public shouldPassForValidNINumber(niNumber: string) {
         const message = "Invalid NI Number";
 
-        const validator = validNiNumber(message);
+        const validator = validNINumber(message);
         const results = validator(niNumber);
         Expect(results).toBeAPass();
     }
@@ -28,7 +28,7 @@ export class ValidNINumberTests {
     public shouldFailForInvalidLength(value: string) {
         const message = "Invalid NI Number";
 
-        const validator = validNiNumber(message);
+        const validator = validNINumber(message);
         const results = validator(value);
         Expect(results).toBeAFailWithMessage(message);
     }
