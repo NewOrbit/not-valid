@@ -49,4 +49,19 @@ export class ValidLengthTests {
             message
         })).toThrowError(Error, "No min or max specified");
     }
+
+    @TestCase(3, "a")
+    @TestCase(3, "abcdef")
+    @TestCase(5, "xx")
+    public shouldFailWithCorrectMessageIfMinAndMaxEqual(minMax: number, value: string) {
+        const message = `Please enter ${minMax} characters`;
+
+        const validator = validLength({
+            min: minMax,
+            max: minMax
+        });
+
+        const results = validator(value);
+        Expect(results).toBeAFailWithMessage(message);
+    }
 }
