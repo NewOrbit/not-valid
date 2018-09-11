@@ -5,15 +5,12 @@
   "main": "bin/index.js",
   "typings": "bin/index.d.ts",
   "scripts": {
-    "prepublish": "npm run review && npm run build",
-
+    "prepublishOnly": "npm run review && npm run build",
     "build": "tsc",
     "build:test": "tsc -p tsconfig.test.json",
-
     "lint:src": "tslint -c tslint.json src/**/*.ts -e src/**/*.d.ts",
     "lint:test": "tslint -c tslint.json test/**/*.ts",
     "lint": "npm run lint:src && npm run lint:test",
-
     "test": "npm run build:test && alsatian \"bin-test/**/*.test.js\"",
     "review": "npm run test && npm run lint"
   },
