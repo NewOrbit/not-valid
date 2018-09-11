@@ -1,15 +1,17 @@
-# @neworbit/validation
+# rule-book
+
+Composable message-based validation
 
 ## Installation
 
-    $ npm install @neworbit/validation --save
+    $ npm install rule-book --save
 
 ## Usage
 
 ### Overview
 
 ```typescript
-import { validate } from "@neworbit/validation";
+import { validate } from "rule-book";
 
 // Use createValidator to specify a rule and the message given for breaking that rule
 const mustContainA = createValidator<string>(v => v.indexOf("A") !== -1, "Value must contain the letter 'a'");
@@ -37,10 +39,10 @@ validate([
 
 A validation function must take in a value `value`, and return `Result.Pass` if `value` is valid, or `Result.Fail(message)` is `value` is invalid. They can also return `Result.Stop`, which will silently stop the validation cycle (no more errors).
 
-This can be done with the helper method `createValidator` in `@neworbit/validation`:
+This can be done with the helper method `createValidator` in `rule-book`:
 
 ```typescript
-import { createValidator } from "@neworbit/validation";
+import { createValidator } from "rule-book";
 
 const mustContainA = createValidator<string>(v => v.indexOf("A") !== -1, "Value must contain the letter 'a'");
 ```

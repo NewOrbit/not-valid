@@ -1,7 +1,7 @@
 {
-  "name": "@neworbit/validation",
+  "name": "rule-book",
   "version": "4.2.1",
-  "description": "NewOrbit validation",
+  "description": "Composable message-based validation",
   "main": "src/index.js",
   "typings": "src/index.d.ts",
   "scripts": {
@@ -20,16 +20,16 @@
   "keywords": [
     "validation"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "author": "NewOrbit Ltd",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NewOrbit/NewOrbit.validation.git"
+    "url": "git+https://github.com/NewOrbit/rule-book.git"
   },
   "bugs": {
-    "url": "https://github.com/NewOrbit/NewOrbit.validation/issues"
+    "url": "https://github.com/NewOrbit/rule-book/issues"
   },
-  "homepage": "https://github.com/NewOrbit/NewOrbit.validation#readme",
+  "homepage": "https://github.com/NewOrbit/rule-book#readme",
   "dependencies": {
     "valid-nino": "^1.0.0"
   },
