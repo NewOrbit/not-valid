@@ -12,15 +12,18 @@ const getMessage = ({ min, max, message }: ValidLengthOptions): string => {
     }
 
     if (max && min) {
+        if (max === min) {
+            return `Please enter ${max} characters`;
+        }
+
         return `Please enter at least ${min} and no more than ${max} characters`;
-    } else if (min) {
-        return `Please enter at least ${min} characters`;
-    } else if (max) {
-        return `Please enter no more than ${max} characters`;
     }
 
-    // we should never get here
-    return "";
+    if (min) {
+        return `Please enter at least ${min} characters`;
+    }
+
+    return `Please enter no more than ${max} characters`;
 };
 
 export const validLength = (options: ValidLengthOptions) => {
