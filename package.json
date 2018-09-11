@@ -1,6 +1,6 @@
 {
   "name": "rule-book",
-  "version": "4.2.1",
+  "version": "1.0.0",
   "description": "Composable message-based validation",
   "main": "bin/index.js",
   "typings": "bin/index.d.ts",
