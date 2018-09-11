@@ -2,20 +2,23 @@
   "name": "rule-book",
   "version": "4.2.1",
   "description": "Composable message-based validation",
-  "main": "src/index.js",
-  "typings": "src/index.d.ts",
+  "main": "bin/index.js",
+  "typings": "bin/index.d.ts",
   "scripts": {
     "prepublish": "npm run review && npm run build",
+
     "build": "tsc",
+    "build:test": "tsc -p tsconfig.test.json",
+
     "lint:src": "tslint -c tslint.json src/**/*.ts -e src/**/*.d.ts",
-    "lint:test": "tslint -c tslint.json test/**/*.test.ts",
+    "lint:test": "tslint -c tslint.json test/**/*.ts",
     "lint": "npm run lint:src && npm run lint:test",
-    "test": "npm run build && alsatian \"test/**/*.test.js\"",
+
+    "test": "npm run build:test && alsatian \"bin-test/**/*.test.js\"",
     "review": "npm run test && npm run lint"
   },
   "files": [
-    "src/**/*.js",
-    "src/**/*.d.ts"
+    "bin"
   ],
   "keywords": [
     "validation"

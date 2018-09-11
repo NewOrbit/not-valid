@@ -9,8 +9,12 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "declaration": true
+    "declaration": true,
+    "outDir": "bin"
   },
+  "include": [
+    "src"
+  ],
   "exclude": [
     "node_modules"
   ]
