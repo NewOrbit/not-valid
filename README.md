@@ -82,7 +82,7 @@ const mustContain = (requirement: any) => {
 };
 ```
 
-As of v4, all validators (except for validators that explicitly check for "required") should treat empty string, null and undefined
+All validators (except for validators that explicitly check for "required") should treat empty string, null and undefined
 as valid.
 This is because we can combine validators with "required" validators in order to enforce something being valid and not empty,
 but also allows us to accept nothing being entered if desired.
