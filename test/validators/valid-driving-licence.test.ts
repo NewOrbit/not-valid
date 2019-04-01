@@ -6,6 +6,7 @@ import { DRIVING_LICENCE } from "../../src/messages";
 @TestFixture()
 export class ValidDrivingLicenseTests {
 
+    @Test("Should pass for valid driving licence")
     @TestCase("AA999123456A9AAA")
     @TestCase("AA999123456A9AA1")
     @TestCase("AA999123456A9A12")
@@ -52,6 +53,7 @@ export class ValidDrivingLicenseTests {
         Expect(results).toBeAPass();
     }
 
+    @Test("Should fail for invalid driving licence")
     @TestCase("     ")
     @TestCase("ABCDE948174ABCD")
     @TestCase("12345AAAAA12ABC")
@@ -78,6 +80,7 @@ export class ValidDrivingLicenseTests {
         Expect(results).toBeAFailWithMessage(failureMessage);
     }
 
+    @Test("Should pass for valid driving licence with options")
     @TestCase("ABCDE123456EF7GH", { issueNumber: "optional" })
     @TestCase("ABCDE123456EF7GH", { issueNumber: "prohibited" })
     @TestCase("ABCDE123456EF7GH12", { issueNumber: "optional" })
@@ -91,6 +94,7 @@ export class ValidDrivingLicenseTests {
         Expect(results).toBeAPass();
     }
 
+    @Test("Should fail for invalid driving licence with options")
     @TestCase("ABCDE123456EF7GH", { issueNumber: "required" })
     @TestCase("ABCDE123456EF7GH12", { issueNumber: "prohibited" })
     @TestCase("12345678", { allowNI: false })
@@ -103,12 +107,14 @@ export class ValidDrivingLicenseTests {
         Expect(results).toBeAFailWithMessage(failureMessage);
     }
 
+    @Test("Should use default error message if none is provided")
     public shouldUseDefaultErrorMessageIfNoneIsProvided() {
         const validator = validUKDrivingLicence();
         const results = validator("foo bar");
         Expect(results).toBeAFailWithMessage(DRIVING_LICENCE);
     }
 
+    @Test("Should use default error message if none is provided in options")
     public shouldUseDefaultErrorMessageIfNoneIsProvidedInOptions() {
         const validator = validUKDrivingLicence({ issueNumber: "optional" });
         const results = validator("foo bar");
