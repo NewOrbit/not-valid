@@ -3,8 +3,8 @@ import { DRIVING_LICENCE } from "../messages";
 import { SyncValidationFunction } from "..";
 
 const regexes = {
-    withIssueNumber: /^([a-zA-Z0-9]{5})([0-9]{6})([a-zA-Z0-9]{5})([0-9]{2})$/,
-    withoutIssueNumber: /^([a-zA-Z0-9]{5})([0-9]{6})([a-zA-Z0-9]{5})$/,
+    withIssueNumber: /^[A-Z]{2}[A-Z|9]{3}[0-9]{6}[A-Z]{1}[A-Z|9]{1}[A-Z0-9]{3}[0-9]{2}$/i,
+    withoutIssueNumber: /^[A-Z]{2}[A-Z|9]{3}[0-9]{6}[A-Z]{1}[A-Z|9]{1}[A-Z0-9]{3}$/i,
     northernIreland: /^\d{8}$/
 };
 

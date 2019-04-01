@@ -6,6 +6,40 @@ import { DRIVING_LICENCE } from "../../src/messages";
 @TestFixture()
 export class ValidDrivingLicenseTests {
 
+    @Test("Should pass for valid driving licence")
+    @TestCase("AA999123456A9AAA")
+    @TestCase("AA999123456A9AA1")
+    @TestCase("AA999123456A9A12")
+    @TestCase("AA999123456A9123")
+    @TestCase("AA999123456AAAAA")
+    @TestCase("AA999123456AAAA1")
+    @TestCase("AA999123456AAA12")
+    @TestCase("AA999123456AA123")
+    @TestCase("AAA99123456A9AAA")
+    @TestCase("AAA99123456A9AA1")
+    @TestCase("AAA99123456A9A12")
+    @TestCase("AAA99123456A9123")
+    @TestCase("AAA99123456AAAAA")
+    @TestCase("AAA99123456AAAA1")
+    @TestCase("AAA99123456AAA12")
+    @TestCase("AAA99123456AA123")
+    @TestCase("AAAA9123456A9AAA")
+    @TestCase("AAAA9123456A9AA1")
+    @TestCase("AAAA9123456A9A12")
+    @TestCase("AAAA9123456A9123")
+    @TestCase("AAAA9123456AAAAA")
+    @TestCase("AAAA9123456AAAA1")
+    @TestCase("AAAA9123456AAA12")
+    @TestCase("AAAA9123456AA123")
+    @TestCase("AAAAA123456A9AAA")
+    @TestCase("AAAAA123456A9AA1")
+    @TestCase("AAAAA123456A9A12")
+    @TestCase("AAAAA123456A9123")
+    @TestCase("AAAAA123456AAAAA")
+    @TestCase("AAAAA123456AAAA1")
+    @TestCase("AAAAA123456AAA12")
+    @TestCase("AAAAA123456AA123")
+    @TestCase("aaaaa123456AAAAA")
     @TestCase("ABCDE948174ABCDE12")
     @TestCase("XYZAS281944IFJEE94")
     @TestCase("ABCDE948174AB1DE")
@@ -19,10 +53,25 @@ export class ValidDrivingLicenseTests {
         Expect(results).toBeAPass();
     }
 
+    @Test("Should fail for invalid driving licence")
     @TestCase("     ")
     @TestCase("ABCDE948174ABCD")
     @TestCase("12345AAAAA12ABC")
     @TestCase("fooABCDE948174ABCDE12bar")
+    @TestCase("9A999123456A9AAA")
+    @TestCase("A9999123456A9AAA")
+    @TestCase("AA999A23456A9AAA")
+    @TestCase("AA9991A3456A9AAA")
+    @TestCase("AA99912A456A9AAA")
+    @TestCase("AA999123A56A9AAA")
+    @TestCase("AA9991234A6A9AAA")
+    @TestCase("AA99912345AA9AAA")
+    @TestCase("AA99912345699AAA")
+    @TestCase("AA999123456A9AA")
+    @TestCase("AA999123456A9AAAAA")
+    @TestCase("1234567890123456")
+    @TestCase("!A999123456A9AAA")
+    @TestCase("$A999123456A9AAA")
     @TestCase("12345678")
     public shouldFailForInvalidDrivingLicence(value: any) {
         const failureMessage = "failure message";
@@ -31,6 +80,7 @@ export class ValidDrivingLicenseTests {
         Expect(results).toBeAFailWithMessage(failureMessage);
     }
 
+    @Test("Should pass for valid driving licence with options")
     @TestCase("ABCDE123456EF7GH", { issueNumber: "optional" })
     @TestCase("ABCDE123456EF7GH", { issueNumber: "prohibited" })
     @TestCase("ABCDE123456EF7GH12", { issueNumber: "optional" })
@@ -44,6 +94,7 @@ export class ValidDrivingLicenseTests {
         Expect(results).toBeAPass();
     }
 
+    @Test("Should fail for invalid driving licence with options")
     @TestCase("ABCDE123456EF7GH", { issueNumber: "required" })
     @TestCase("ABCDE123456EF7GH12", { issueNumber: "prohibited" })
     @TestCase("12345678", { allowNI: false })
@@ -56,12 +107,14 @@ export class ValidDrivingLicenseTests {
         Expect(results).toBeAFailWithMessage(failureMessage);
     }
 
+    @Test("Should use default error message if none is provided")
     public shouldUseDefaultErrorMessageIfNoneIsProvided() {
         const validator = validUKDrivingLicence();
         const results = validator("foo bar");
         Expect(results).toBeAFailWithMessage(DRIVING_LICENCE);
     }
 
+    @Test("Should use default error message if none is provided in options")
     public shouldUseDefaultErrorMessageIfNoneIsProvidedInOptions() {
         const validator = validUKDrivingLicence({ issueNumber: "optional" });
         const results = validator("foo bar");
