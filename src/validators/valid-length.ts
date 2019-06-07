@@ -32,7 +32,8 @@ export const validLength = (options: ValidLengthOptions) => {
     }
 
     return createValidator<string>(s =>
-        (options.min === undefined || s.length >= options.min) && (options.max === undefined || s.length <= options.max)
+        !s
+        || ((options.min === undefined || s.length >= options.min) && (options.max === undefined || s.length <= options.max))
         , getMessage(options)
     );
 };

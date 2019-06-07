@@ -5,6 +5,23 @@ import { validLength } from "../../src/validators/valid-length";
 @TestFixture("ValidLength")
 export class ValidLengthTests {
 
+    @TestCase(null)
+    @TestCase(undefined)
+    @TestCase("")
+    @Test("should pass for null, undefined or empty")
+    public shouldPassForNullUndefinedOrEmpty(value: string) {
+        const message = "Invalid length";
+
+        const validator = validLength({
+            min: 3,
+            max: 5,
+            message
+        });
+
+        const results = validator(value);
+        Expect(results).toBeAPass();
+    }
+
     @TestCase(2, 10, "12345")
     @TestCase(5, undefined, "12345")
     @TestCase(undefined, 6, "123")
