@@ -1,6 +1,6 @@
 {
   "name": "not-valid",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Composable message-based validation",
   "main": "bin/index.js",
   "typings": "bin/index.d.ts",
